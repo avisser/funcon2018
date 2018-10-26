@@ -1,0 +1,20 @@
+<aura:component description="Router">
+    <ltng:require
+            scripts="{!$Resource.Framework__SLDS_BaseV2+'/js/lodash.min.js'}"
+            afterScriptsLoaded="{!c.doInit}"/>
+    <aura:method name="setRoutes" action="{!c.setRoutes}" access="public">
+        <aura:attribute name="parentCmp" type="Object" required="true"/>
+        <aura:attribute name="routesJson" type="Object" required="true"/>
+        <aura:attribute name="onRenderCallback" type="Object" required="false"/>
+        <aura:attribute name="helper" type="Object" required="false"/>
+    </aura:method>
+
+    <aura:handler name="destroy" value="{!this}" action="{!c.handleDestroy}"/>
+
+    <aura:attribute name="parentCmp" type="Object" access="private"/>
+    <aura:attribute name="routesJson" type="Object" access="private"/>
+    <aura:attribute name="onRenderCallback" type="Object" access="private"/>
+    <aura:attribute name="helper" type="Object" access="private"/>
+    <aura:attribute name="doChange" type="Boolean" access="private"/>
+    <aura:attribute name="renderedPath" type="String" access="private"/>
+</aura:component>

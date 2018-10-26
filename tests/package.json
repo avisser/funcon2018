@@ -1,0 +1,41 @@
+{
+  "name": "auraspecs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha  --require babel-register --require mocha-aura --reporter progress \"specs/**/*.js\"",
+    "test-jenkins": "JUNIT_REPORT_STACK=1 mocha --require babel-register --require mocha-aura --no-colors --reporter mocha-multi --reporter-options mochawesome=/dev/null,mocha-jenkins-reporter=- 'specs/**/*.js'",
+    "watch": "chokidar --initial './specs/**' '../src/aura/**/*.js' -c 'npm run test'",
+    "watch-coverage": "chokidar --initial './specs/**' '../src/aura/**/*.js' -c 'npm run coverage'",
+    "precoverage": "babel -q ./specs -d ./distspecs",
+    "coverage": "istanbul cover -x \"distspecs/**/*.js\" --root \"../src/aura\" --include-all-sources --post-require-hook mocha-aura ./node_modules/mocha-runner/bin/runner.js -- --reporter min --quiet \"distspecs/**/*.js\" html text-summary",
+    "postcoverage": "rm -rf ./distspecs",
+    "coverage-jenkins": "npm run coverage && istanbul report cobertura",
+    "nuke": "rm -rf ./node_modules && rm -f yarn.lock && yarn cache clean && yarn install"
+  },
+  "auraPath": "../src",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-register": "^6.24.1",
+    "chokidar-cli": "^1.2.0",
+    "istanbul": "^0.4.5"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "chai": "^3.5.0",
+    "lodash": "^4.17.10",
+    "mocha": "^3.5.3",
+    "mocha-aura": "https://github.com/Fonteva/mocha-aura.git#0.2.1",
+    "mocha-fonteva-adapters": "https://github.com/Fonteva/mocha-fonteva-adapters.git#0.2.1",
+    "mocha-fonteva-data-generator": "https://github.com/Fonteva/mocha-fonteva-data-generator.git#0.1.2",
+    "mocha-jenkins-reporter": "^0.3.10",
+    "mocha-multi": "^0.11.1",
+    "mocha-runner": "^1.1.2",
+    "mochawesome": "^2.3.1",
+    "npm": "^6.2.0",
+    "sinon": "^2.4.1",
+    "sinon-chai": "^2.14.0"
+  }
+}

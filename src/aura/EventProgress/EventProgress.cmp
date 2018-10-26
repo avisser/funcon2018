@@ -1,0 +1,30 @@
+<aura:component description="EventProgress" implements="force:hasRecordId,flexipage:availableForRecordHome"
+                controller="EventProgressController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="sold" type="Integer"/>
+    <aura:attribute name="remaining" type="Integer"/>
+    <aura:attribute name="currentStatus" type="String"/>
+    <aura:attribute name="statuses" type="List"/>
+
+    <div>
+        Tickets sold ({!v.sold} / {!v.sold + v.remaining}):
+        <lightning:progressBar value="{!v.sold}" size="{!v.sold + v.remaining}" title="Tickets Sold"
+                               class="slds-p-around_medium "/>
+    </div>
+
+    <div>
+        Event status:
+        <div class="slds-grid slds-col slds-font-weight_bold">
+            <aura:iteration items="{! v.statuses }" var="status" indexVar="i">
+                <div class="{!status.Name == v.currentStatus ? 'slds-text-color_success' : ''}">
+                    <aura:if isTrue="{!i > 0}">
+                        <span class="slds-p-horizontal_x-small">&gt;</span>
+                    </aura:if>
+                    {!status.Name}
+                </div>
+            </aura:iteration>
+        </div>
+    </div>
+
+</aura:component>
