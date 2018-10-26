@@ -61,9 +61,7 @@ describe('EventProgressController', function () {
             }));
             const cmp = componentFactory({
                 getProgress,
-                value: {
-                    recordId: '123456789123456789'
-                }
+                recordId: '123456789123456789'
             });
             controller.doInit(cmp, event, helper);
 
