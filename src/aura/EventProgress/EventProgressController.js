@@ -21,8 +21,6 @@
                 cmp.set('v.sold', retVal.ticketsSold > 0 ? retVal.ticketsSold : 15);
                 cmp.set('v.remaining', retVal.ticketsRemaining);
 
-                var status = cmp.find('status');
-
                 cmp.set('v.currentStatus', retVal.currentStatus);
                 cmp.set('v.statuses', helper.sortStatuses(retVal.statuses));
             }
